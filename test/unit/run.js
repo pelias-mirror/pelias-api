@@ -5,6 +5,13 @@ var common = {
   // a visual deep diff rendered using console.error()
   diff: function( actual, expected ){
     console.error( diff.compare( actual, expected ) );
+  },
+  // t.deepEqual wrapper that also prints a visual diff on failure
+  deepEqual: function( t, actual, expected, msg ){
+    if( !require('util').isDeepStrictEqual( actual, expected ) ){
+      console.error( diff.compare( actual, expected ) );
+    }
+    t.deepEqual( actual, expected, msg );
   }
 };
 
